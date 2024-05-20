@@ -1,6 +1,6 @@
 use Northwind
 go
-
+```sql
 select 'Dinçer' as Adi, 'Nalbant' as Soyadi -- istenen verileri tablo olarak geri döndürür
 
 select * from Personeller -- tüm tabloyu seçme
@@ -314,3 +314,10 @@ select @@ROWCOUNT
 
 --------------------------- DBCC Checkident => verisel yapıyı ozar => tavsiye edilmez ---------------------------
 DBCC Checkident(personeller, reseed, 43) -- bu sayede personeller tablosuna eklenen veri id olarak 44. satıra eklenecek => maksimum değerden büyük seçilmeli ki patlamasın
+
+
+
+
+
+
+```
