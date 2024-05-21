@@ -103,8 +103,21 @@ SELECT country_of_birth, COUNT(*) FROM person GROUP BY country_of_birth ORDER BY
 ```
 
 #
-### HAVING
+### GROUP BY HAVING
 Adds extra filtering to the GROUP BY command.
 ```sql
 SELECT country_of_birth, COUNT(*) FROM person GROUP BY country_of_birth HAVING COUNT(*) > 5 ORDER BY country_of_birth; -- returns the number of people born in each country (total 2 columns: country name and number of people)
+```
+
+#
+### AGGREGATE FUNCTIONS - Also look at queries file
+Aggregate functions compute a single result from a set of input values
+[Link](https://www.postgresql.org/docs/9.5/functions-aggregate.html)
+```sql
+SELECT country, ARRAY_AGG(email) AS emails FROM person WHERE country ='Indonesia' GROUP BY country; -- RETURNS: Indonesia | {jpidgeley0@telegraph.co.uk, lhaggartyr2@google.nl, mspearingrj@arizona.edu, ..., aebirn@dion.ne.jp}
+
+SELECT COUNT(*) AS total_males, (SELECT COUNT(*) FROM person) AS total_people,
+       CAST(COUNT(*) AS FLOAT) / (SELECT COUNT(*) FROM person) AS male_ratio
+FROM person
+WHERE gender = 'Male'-- male / total people
 ```
