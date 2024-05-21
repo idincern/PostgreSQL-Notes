@@ -121,3 +121,5 @@ SELECT COUNT(*) AS total_males, (SELECT COUNT(*) FROM person) AS total_people,
 FROM person
 WHERE gender = 'Male'-- male / total people
 ```
+1:51:16 / 4:19:33
+
