@@ -110,9 +110,9 @@ SELECT country_of_birth, COUNT(*) FROM person GROUP BY country_of_birth HAVING C
 ```
 
 #
-### AGGREGATE FUNCTIONS - Also look at queries file
+### AGGREGATE FUNCTIONS - Note: Also look at [queries.pgsql](https://github.com/idincern/PostgreSQL-Notes/blob/main/queries.pgsql) file
 Aggregate functions compute a single result from a set of input values
-[Link](https://www.postgresql.org/docs/9.5/functions-aggregate.html)
+[Documentation link](https://www.postgresql.org/docs/9.5/functions-aggregate.html)
 ```sql
 SELECT country, ARRAY_AGG(email) AS emails FROM person WHERE country ='Indonesia' GROUP BY country; -- RETURNS: Indonesia | {jpidgeley0@telegraph.co.uk, lhaggartyr2@google.nl, mspearingrj@arizona.edu, ..., aebirn@dion.ne.jp}
 
@@ -120,6 +120,32 @@ SELECT COUNT(*) AS total_males, (SELECT COUNT(*) FROM person) AS total_people,
        CAST(COUNT(*) AS FLOAT) / (SELECT COUNT(*) FROM person) AS male_ratio
 FROM person
 WHERE gender = 'Male'-- male / total people
+
+-- min, max, avg, round, sum
+SELECT MIN(id) AS min_id from person;
+SELECT MAX(date_of_birth) AS newest from person;
+SELECT AVG(id) AS avg_id from person;
+
+SELECT country, ROUND(AVG(id)) from person GROUP BY country ORDER BY country;
+SELECT country, SUM(id)/COUNT(person) as IdSum from person GROUP BY country ORDER BY SUM(id) DESC;
 ```
-1:51:16 / 4:19:33
+#
+### ARITHMETIC OPERATORS
+```sql
+SELECT 10+2 as sum;
+SELECT 10-2 as diff;
+SELECT 10-2 as diff;
+SELECT 5^2 as power;
+SELECT 10%3 as mod;
+```
+
+#
+### COALESCE
+Gets the first item that is not null.
+```sql
+SELECT COALESCE(null, 1, 10) as first_num;
+
+SELECT COALESCE(email , 'E-mail not provided.') as emails from person; -- changes empty emails to the text
+
+```
 
